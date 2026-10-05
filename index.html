@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141415">
+  <meta name="description" content="Relay — a developer operations dashboard concept.">
+  <title>Relay — Overview</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f3bf6'/%3E%3Cpath d='M9 9h11v7H9m6 0 8 8' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to dashboard</a>
+  <button class="sidebar-backdrop" aria-label="Close navigation" tabindex="-1"></button>
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <a class="brand" href="#overview" aria-label="Relay overview">
+      <svg class="brand-mark" viewBox="0 0 32 36" aria-hidden="true"><path fill="#9f80ff" d="M16 1 31 9.5 16 18 1 9.5Z"/><path fill="#6f42e8" d="M1 9.5 16 18v17L1 26.5Z"/><path fill="#8357f4" d="m16 18 15-8.5v17L16 35Z"/><path fill="#1d1733" d="m8 14 8 4.5 8-4.5v9L16 28l-8-4.5Z"/><path fill="#bba3ff" d="m16 18 8-4.5v9L16 28Z"/></svg>
+      <span><strong>Relay</strong><small>Developer operations</small></span>
+    </a>
+    <button class="icon-button sidebar-close" aria-label="Close navigation menu"><i data-icon="close"></i></button>
+    <nav>
+      <div class="nav-group primary-nav"><span class="nav-indicator" aria-hidden="true"></span>
+        <a class="nav-item active" href="#overview" data-page="overview"><i data-icon="overview"></i><span>Overview</span></a>
+        <a class="nav-item" href="#services" data-page="services"><i data-icon="cube"></i><span>Services</span><span class="nav-count">8</span></a>
+        <a class="nav-item" href="#deployments" data-page="deployments"><i data-icon="layers"></i><span>Deployments</span></a>
+        <a class="nav-item" href="#logs" data-page="logs"><i data-icon="terminal"></i><span>Logs</span></a>
+        <a class="nav-item" href="#incidents" data-page="incidents"><i data-icon="alert"></i><span>Incidents</span><span class="nav-count incident-count">1</span></a>
+      </div>
+      <div class="nav-group"><p class="nav-label">Workspace</p>
+        <button class="nav-item" data-action="workspace"><i data-icon="building"></i><span>Acme Engineering</span></button>
+        <button class="nav-item" data-action="team"><i data-icon="users"></i><span>Team members</span></button>
+      </div>
+      <div class="nav-group"><p class="nav-label">Environments</p>
+        <button class="nav-item environment-link" data-environment="Production"><span class="dot green"></span><span>Production</span></button>
+        <button class="nav-item environment-link" data-environment="Staging"><span class="dot purple"></span><span>Staging</span></button>
+        <button class="nav-item environment-link" data-environment="Preview"><span class="dot gray"></span><span>Preview</span></button>
+      </div>
+      <div class="nav-group"><p class="nav-label">Observability</p>
+        <button class="nav-item" data-action="alerts"><i data-icon="bell"></i><span>Alert rules</span></button>
+        <button class="nav-item" data-action="integrations"><i data-icon="plug"></i><span>Integrations</span></button>
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="nav-item" data-action="settings"><i data-icon="settings"></i><span>Settings</span></button>
+      <button class="nav-item" data-action="help"><i data-icon="help"></i><span>Help &amp; support</span></button>
+      <button class="sidebar-profile" data-action="profile"><span class="avatar avatar-0">AM</span><span><strong>Alex Morgan</strong></span><i data-icon="chevrons"></i></button>
+    </div>
+  </aside>
+  <main id="main" tabindex="-1">
+    <header class="topbar">
+      <div class="page-identity"><button class="icon-button mobile-menu" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"><i data-icon="menu"></i></button><h1 id="page-title">Overview</h1><span class="badge amber" id="global-health"><span class="dot"></span>1 degraded</span></div>
+      <div class="topbar-actions"><button class="icon-button" data-action="search" aria-label="Search workspace (Control or Command K)"><i data-icon="search"></i></button><button class="icon-button notification-button" data-action="notifications" aria-label="Notifications, 2 updates"><i data-icon="bell"></i><span class="notification-dot"></span></button><button class="profile-chip" data-action="profile"><span class="avatar avatar-0" aria-hidden="true">AM</span><span>Alex Morgan</span></button></div>
+    </header>
+    <div class="page-tabs" aria-label="Dashboard views"><span class="tab-indicator" aria-hidden="true"></span><button class="page-tab active" data-tab="overview" aria-pressed="true">Overview</button><button class="page-tab" data-tab="performance" aria-pressed="false">Performance</button><button class="page-tab" data-tab="activity" aria-pressed="false">Activity</button></div>
+    <section class="toolbar" aria-label="Dashboard filters">
+      <div class="filters">
+        <div class="filter dropdown" data-label="Project"><select id="project-filter" aria-label="Project"><option value="all">All projects</option><option value="web">Web platform</option><option value="core">Core services</option></select></div>
+        <div class="filter dropdown" data-label="Environment"><select id="environment-filter" aria-label="Environment"><option data-dot="green">Production</option><option data-dot="purple">Staging</option><option data-dot="gray">Preview</option></select></div>
+        <div class="filter dropdown" data-label="Time range"><select id="time-filter" aria-label="Time range"><option value="1">Last hour</option><option value="24" selected>Last 24 hours</option><option value="168">Last 7 days</option><option value="720">Last 30 days</option></select></div>
+      </div>
+      <div class="toolbar-actions"><button class="button" data-action="export"><i data-icon="upload"></i>Export</button><button class="button primary" data-action="deploy"><i data-icon="plus"></i>New deployment</button></div>
+    </section>
+    <div id="dashboard-content">
+      <section class="metrics" aria-label="Key metrics"></section>
+      <section class="analysis-row">
+        <div class="chart-panel"><div class="section-heading"><div><h2 id="chart-title">Request volume</h2><div class="chart-summary"><strong id="chart-total">2.84M</strong></div><p class="chart-unit" id="chart-unit">requests/min</p></div><div class="chart-select dropdown" data-align="end"><select id="chart-type" aria-label="Chart metric"><option value="requests">Requests</option><option value="latency">Latency</option><option value="errors">Error rate</option></select></div></div><div class="chart-wrap" id="main-chart" tabindex="0" role="group" aria-roledescription="interactive chart" aria-label="Request volume chart. Use the left and right arrow keys to inspect values."></div><p class="sr-only" id="chart-live" aria-live="polite"></p></div>
+        <aside class="attention-panel" aria-labelledby="attention-title"></aside>
+      </section>
+    </div>
+    <section class="services-section" aria-labelledby="services-title">
+      <div class="table-toolbar"><div class="section-name"><h2 id="services-title">Services</h2><span id="service-count">8 in view</span></div><div class="table-controls"><label class="table-search"><i data-icon="search"></i><input id="service-search" type="search" placeholder="Search services…" aria-label="Search services"></label><button class="text-button" id="services-view-all" data-page="services">View all</button></div></div>
+      <div class="table-scroll"><table class="services-table"><thead><tr><th class="check-cell"><input id="select-all" type="checkbox" aria-label="Select all visible services"></th><th><button class="sort-button" data-sort="name">Service<i data-icon="sort"></i></button></th><th>Environment</th><th>Owner</th><th>Status</th><th><button class="sort-button" data-sort="requests">Requests<i data-icon="sort"></i></button></th><th><button class="sort-button" data-sort="latency">p95 latency<i data-icon="sort"></i></button></th><th>Traffic trend</th><th>Last deployment</th><th class="row-end"><span class="sr-only">Details</span></th></tr></thead><tbody id="service-rows"></tbody></table></div>
+      <div class="table-footer"><span id="table-summary">8 services in view</span><span id="health-summary"></span></div>
+    </section>
+    <section class="deployments-section" aria-labelledby="deployments-title"><div class="table-toolbar"><div class="section-name"><h2 id="deployments-title">Recent deployments</h2><span class="count-pill" id="deployment-count">3</span></div><button class="text-button" data-action="all-deployments">View all<i data-icon="arrow"></i></button></div><div class="table-scroll"><table class="deployment-table"><thead><tr><th>Deployment</th><th>Service</th><th>Branch</th><th>Commit</th><th>Status</th><th>Deployed by</th><th>Time</th></tr></thead><tbody id="deployment-rows"></tbody></table></div></section>
+    <section id="extra-content" hidden></section>
+  </main>
+  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title"><div id="detail-content"></div></dialog>
+  <dialog id="action-dialog" class="action-dialog" aria-labelledby="action-title"><div id="action-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
